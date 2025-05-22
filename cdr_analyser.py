@@ -86,6 +86,9 @@ def load_all_dat_from_folder(folder_path):
                 on_bad_lines='warn'
             )
             df['duration'] = pd.to_timedelta(df['duration'], errors='coerce')
+            df['calling number'] = pd.to_numeric(df['calling number'], errors='coerce')
+            df['connected number'] = pd.to_numeric(df['connected number'], errors='coerce')
+            df['charged number'] = pd.to_numeric(df['charged number'], errors='coerce')
             list_of_dataframes.append(df)
         except Exception as e:
             print(f"Ошибка при чтении или обработке файла '{os.path.basename(file_path)}': {e}")
@@ -247,7 +250,7 @@ def calculate_active_calls_per_minute(df):
     if not daily_summary_df.empty:
         # Преобразуем столбец 'Дата' в datetime для единообразия
         daily_summary_df['Дата'] = pd.to_datetime(daily_summary_df['Дата'])
-        daily_summary_df['Время ЧНН'] = pd.to_datetime(daily_summary_df['Время ЧНН'])
+        daily_summary_df['Время ЧНН (UTC)'] = pd.to_datetime(daily_summary_df['Время ЧНН (UTC)'])
         print("\nСводка по количеству звонков за день:")
         print(daily_summary_df.head())
     else:
