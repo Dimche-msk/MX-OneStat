@@ -231,7 +231,7 @@ def calculate_active_calls_per_minute(df):
                 'Количество звонков за день': day_count,
                 'Общая длительность за день (мин=*24*60)': total_duration_for_day,
                 'Макс. одновременных звонков в ЧНН':max_count,
-                'Время ЧНН':max_count_time
+                'Время ЧНН (UTC)':max_count_time
             })
             print({
                 'Дата': day_snapshot.date(),
@@ -260,7 +260,7 @@ def calculate_active_calls_per_minute(df):
 
 # Пример использования (остальная часть вашего скрипта):
 if __name__ == "__main__":
-    folder_with_dat = "CDR/PO"  # Замените на ваш путь
+    folder_with_dat = "CDR/PY"  # Замените на ваш путь
     cache_file_path=f'{folder_with_dat}/all_data_cache.parquet'
     if os.path.exists(cache_file_path):
         print("Загрузка данных из кэш", cache_file_path)
