@@ -11,10 +11,8 @@ def load_all_dat_from_folder(folder_path):
     Загружает все DAT-файлы (в формате CSV) из указанной папки в один pandas DataFrame,
     учитывая специфическую структуру заголовков, комментариев и специальных символов,
     и преобразует столбцы времени UTC в datetime объекты.
-
     Args:
         folder_path (str): Путь к папке с DAT-файлами.
-
     Returns:
         pandas.DataFrame: Объединенный DataFrame со всеми данными из DAT-файлов.
                           Возвращает пустой DataFrame, если файлы не найдены, папка не существует,
@@ -174,11 +172,6 @@ def calculate_active_calls_per_minute(df):
         print(f"Ошибка: В DataFrame отсутствуют необходимые столбцы: {required_cols}")
         return pd.DataFrame()
 
-
-
-
-
-
     # 2. Создание полного временного диапазона
     min_overall_time = pd.to_datetime(df['start time UTC'].min())
     max_overall_time = pd.to_datetime(df['start time UTC'].max())
@@ -188,7 +181,6 @@ def calculate_active_calls_per_minute(df):
         return pd.DataFrame()
 
     # Создаем временной ряд для каждого дня в диапазоне
-
     full_day_range = pd.date_range(start=min_overall_time, end=max_overall_time, freq='D')
 
     daily_call_counts_list = []
@@ -255,13 +247,10 @@ def calculate_active_calls_per_minute(df):
         print(daily_summary_df.head())
     else:
         print("\nНе удалось сформировать сводку по дням (возможно, full_day_range был пуст или исходный df).")
-
-
     print("Подсчет активных звонков завершен.")
     return  daily_summary_df
 
 
-# Пример использования (остальная часть вашего скрипта):
 if __name__ == "__main__":
     folder_with_dat = "CDR/PY"  # Замените на ваш путь
     cache_file_path=f'{folder_with_dat}/all_data_cache.parquet'
