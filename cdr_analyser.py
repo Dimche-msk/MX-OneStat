@@ -32,7 +32,6 @@ def load_all_dat_from_folder(folder_path):
     list_of_dataframes = []
     column_names = None
     date_columns = ['start time UTC', 'stop time UTC', 'start time local', 'stop time local'] # Столбцы для преобразования в datetime
-
     # Извлечение имен столбцов из первого файла
     try:
         first_file_path = dat_files[0]
@@ -124,7 +123,6 @@ def load_all_dat_from_folder(folder_path):
                     # Далее 'start time UTC' будет обработан как колонка
 
     # Обработка колонок
-
     required_cols = ['start time UTC', 'stop time UTC']
     for col in required_cols:
         if col in combined_df.columns:
@@ -275,7 +273,6 @@ if __name__ == "__main__":
         # Сохранение в Excel
         excel_output_path = os.path.join(folder_with_dat, "active_calls_per_minute.xlsx")
         try:
-            # Для сохранения в Excel может потребоваться установить openpyxl: pip install openpyxl
             active_calls_df.to_excel(excel_output_path, index=False, engine='openpyxl')
             print(f"\nРезультат успешно сохранен в Excel файл: {excel_output_path}")
         except Exception as e:
